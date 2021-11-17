@@ -1,0 +1,28 @@
+{% extends "events/base.html" %}
+{% block content %}
+    <center><h1>My events</h1><hr>
+    {% if events|length == 0 %}
+            <br><br><br><h4>No events here</h4><br><br><br>
+        {% else %}
+            <table class="table table-striped table-bordered table-hover">
+                {% for event in events %}
+                    <tr>
+                        <td><b><a href="{% url 'show-event' event.id %}" style="text-decoration: none;">{{ event }}</a></b></td>
+                        {% if user.is_authenticated %}
+                            {% if user == event.manager or user.is_superuser %}
+                            <td align="right">
+                                <a href="{% url 'update-event' event.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+                                <a href="{% url 'delete-event' event.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                            </td>
+                            {% else %}
+                                <td align="right">
+                                    <a class="disabled btn btn-outline-secondary btn-sm">Update</a>
+                                    <a class="disabled btn btn-outline-danger btn-sm">Delete</a>
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table><br>
+        {% endif %}</center>
+{% endblock %}

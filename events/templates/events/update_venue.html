@@ -1,0 +1,23 @@
+{% extends "events/base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.id == venue.owner or user.is_superuser %}
+            <center>
+                <h1>Update Venue</h1><hr>
+                <form action="" method=POST>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Update" class="btn btn-secondary">
+                </form>
+            </center>
+        {% else %}
+            <h1>Access Denied</h1>
+            <p>Only the event manager can update this event</p>
+            <b>Logined User:</b>{{ user }}<br>
+            <b>Owner:</b>{{ venue_owner }}
+        {% endif %}
+    {% else %}
+        <h1>Sorry!You must be Logged in to view this page!</h1>
+        <a href="{% url 'login' %}">Login here</a>
+    {% endif %}
+{% endblock %}

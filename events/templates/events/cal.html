@@ -1,0 +1,8 @@
+{% extends "events/base.html" %}
+{% block content %}
+    <center>
+        <h1>Welcome to PineApple Calender</h1>
+        As of {{ time }}<br><br><br><br>
+        {{ cal|safe }}<br><br>
+    </center>
+{% endblock %}

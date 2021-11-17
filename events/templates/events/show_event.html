@@ -1,0 +1,14 @@
+{% extends "events/base.html" %}
+{% block content %}
+    <div class="card">
+        <div class="card-header"><b>{{ event }}</b></div>
+            <div class="card-body">
+                <ul>
+                    <li><b>Date</b>: {{ event.event_date }}</li>
+                    <li><b>Venue</b>: <a style="text-decoration:none;" href="{% url 'show-venue' event.venue.id %}">{{ event.venue }}</a></li>
+                    <li><b>Manager</b>: {{ event.manager }}</li>
+                    <li><b>Description</b>: {{ event.description }}</li>
+                </ul>
+            </div>
+        </div><br>
+{% endblock %}

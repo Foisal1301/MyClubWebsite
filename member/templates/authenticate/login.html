@@ -1,0 +1,33 @@
+{% extends "events/base.html" %}
+{% block content %}
+    <div class="shadow p-4 mb-5 bg-body rounded">
+    <center><h1>Log in</h1></center><br> 
+        <form action="" method=POST>
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Email address">
+          </div><br>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" id="pass">
+          </div><br>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="showPassword()">
+            <label class="form-check-label" for="flexCheckDefault">
+              Show Password
+            </label>
+          </div><br>
+          <div class="row"><input type="submit" value="Log in" class="btn btn-secondary"><br><br></div>
+          <div class="row"><a href="#" class="btn btn-secondary">Forgotten password?</a><br><br></div>
+          <div class="row"><a href="{% url 'register-user' %}" class="btn btn-secondary">Create An Account</a></div>
+        </form></div><br><br><br>
+        <script>
+            function showPassword(){
+                var p = document.getElementById('pass');
+                if (p.type === 'password'){
+                    p.type = 'text';
+                }else{
+                    p.type = 'password';
+                }
+            }
+        </script>
+{% endblock %}

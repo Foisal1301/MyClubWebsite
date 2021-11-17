@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">PineApple</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'cal' %}">Calender</a>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link active dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'events' %}">Show All events</a></li>
+              {% if user.is_authenticated %}
+              <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'add-event' %}">Add event</a></li>
+              {% endif %}
+            </ul>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link active dropdown-toggle" href="#" id=role="button" data-bs-toggle="dropdown" aria-expanded="false">Venues</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'venues' %}">Show All venues</a></li>
+              {% if user.is_authenticated %}
+              <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'add-venue' %}">Add venue</a></li>
+              {% endif %}
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Downloads</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="color:black;">
+              <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'venues-text' %}">Venues Text</a></li>
+              <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'venues-csv' %}">Venues CSV</a></li>
+              <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'venues-pdf' %}">Venues PDF</a></li>
+              <!--<li class="dropdown-divider"></li>-->
+            </ul>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user }}</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="color:black;">
+                <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'logout' %}">Log-Out</a></li>
+                <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'my-events' %}">My events</a></li>
+              </ul>
+            </li>
+          {% else %}
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Log in</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="color:black;">
+                <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'login' %}">Log-In</a></li>
+                <li><a class="dropdown-item nav-link" style="color:black;" href="{% url 'register-user' %}">Register</a></li>
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex" method=POST action="{% url 'search' %}">
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+</nav>

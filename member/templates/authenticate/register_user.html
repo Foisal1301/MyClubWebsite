@@ -1,0 +1,35 @@
+{% extends "events/base.html" %}
+{% block content %}
+    {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            There was an error!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+    <div class="shadow p-4 mb-5 bg-body rounded">
+    <center><h1>Register</h1></center>
+        <form action="{% url 'register-user' %}" method=POST>
+            {% csrf_token %}
+            {{ form.as_p }}<br>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="showPassword()">
+              <label class="form-check-label" for="flexCheckDefault">
+                Show Password
+              </label>
+            </div><br>
+            <center><input type="submit" value="Register" class="btn btn-secondary"></center>
+        </form></div><br><br><br>
+        <script>
+            function showPassword(){
+                var p1 = document.getElementById('id_password1');
+                var p2 = document.getElementById('id_password2');
+                if (p1.type === 'password' && p2.type === 'password'){
+                    p1.type = 'text';
+                    p2.type = 'text';
+                }else{
+                    p1.type = 'password';
+                    p2.type = 'password';
+                }
+            }
+        </script>
+{% endblock %}
